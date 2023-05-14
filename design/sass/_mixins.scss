@@ -1,0 +1,6 @@
+//MIXIN BREACKPOINT
+@mixin breackpoint($breackpoint) {
+  @media screen and (min-width: $breackpoint) {
+    @content;
+  }
+}

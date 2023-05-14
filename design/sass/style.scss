@@ -1,0 +1,134 @@
+@import "_mixins.scss";
+@import "_config.scss";
+
+body {
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+#chronometer {
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.item {
+  width: $size-card-mobile;
+  height: $size-card-mobile;
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+  margin: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+
+  @include breackpoint($tablette) {
+    width: $size-card-tablette;
+    height: $size-card-tablette;
+  }
+
+  @include breackpoint($desktop) {
+    width: $size-card-desktop;
+    height: $size-card-desktop;
+  }
+
+  .text-item {
+    display: none;
+
+    @include breackpoint($tablette) {
+      display: block;
+      font-size: 17px;
+    }
+
+    @include breackpoint($desktop) {
+      font-size: 25px;
+    }
+  }
+}
+
+img {
+  width: $size-card-mobile;
+  height: $size-card-mobile;
+  margin: 3px;
+  vertical-align: middle;
+
+  @include breackpoint($tablette) {
+    width: $size-card-tablette;
+    height: $size-card-tablette;
+  }
+
+  @include breackpoint($desktop) {
+    width: $size-card-desktop;
+    height: $size-card-desktop;
+  }
+}
+
+.restart {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #3e8e41;
+  }
+
+  &:active {
+    background-color: #4caf50;
+    transform: translateY(1px);
+  }
+}
+
+.win {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4caf50;
+  margin-top: 0px;
+
+  @include breackpoint($tablette) {
+    font-size: 30px;
+  }
+
+  @include breackpoint($desktop) {
+    font-size: 35px;
+  }
+}
+
+.record {
+  @include breackpoint($tablette) {
+    font-size: 20px;
+  }
+
+  @include breackpoint($desktop) {
+    font-size: 25px;
+  }
+}
+
+.message {
+  @include breackpoint($tablette) {
+    font-size: 15px;
+  }
+
+  @include breackpoint($desktop) {
+    font-size: 20px;
+  }
+}
+
+.hide {
+  display: none;
+}
