@@ -114,7 +114,7 @@ const displayGameBoard = () => {
     text += "<div>";
     row.forEach((cell, indexColumn) => {
       if (cell === 0) {
-        text += `<button class='item' onclick='checkCell(\"${indexRow}-${indexColumn}\")'><span class='text-item'>Dévoiler</span></button>`;
+        text += `<button class='item' id='button-${indexRow}-${indexColumn}'><span class='text-item'>Dévoiler</span></button>`;
       } else {
         text += `<img src='${getImage(
           cell
@@ -125,6 +125,19 @@ const displayGameBoard = () => {
   });
 
   content.innerHTML = text;
+
+  gameBoard.forEach((row, indexRow) => {
+    row.forEach((cell, indexColumn) => {
+      if (cell === 0) {
+        const button = document.getElementById(
+          `button-${indexRow}-${indexColumn}`
+        );
+        button.addEventListener("click", () => {
+          checkCell(`${indexRow}-${indexColumn}`);
+        });
+      }
+    });
+  });
 };
 
 const viewModal = () => {
