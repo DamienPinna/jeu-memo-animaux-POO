@@ -1,4 +1,4 @@
-export class Image {
+export default class Image {
   static getImage(valueCell) {
     let pathImage = "./images/";
     switch (valueCell) {
