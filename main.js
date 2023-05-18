@@ -1,11 +1,12 @@
+import TimeUtils from "./class/timeUtils.js";
 import Image from "./class/image.js";
 import Chronometer from "./class/chronometer.js";
 import GameBoard from "./class/gameBoard.js";
+import Game from "./class/game.js";
 
 const chronometer = new Chronometer();
 const gameBoard = new GameBoard();
-const content = document.querySelector("#content");
-const modal = document.querySelector("#modal");
+const game = new Game();
 const restart = document.querySelector(".restart");
 const record = document.querySelector(".record");
 const message = document.querySelector(".message");
@@ -34,7 +35,7 @@ const displayGameBoard = () => {
     text += "</div>";
   });
 
-  content.innerHTML = text;
+  game.content.innerHTML = text;
 
   gameBoard.gameBoard.forEach((row, indexRow) => {
     row.forEach((cell, indexColumn) => {
@@ -48,11 +49,6 @@ const displayGameBoard = () => {
       }
     });
   });
-};
-
-const viewModal = () => {
-  content.classList.add("hide");
-  modal.classList.remove("hide");
 };
 
 const viewBestScore = (score) => {
@@ -69,7 +65,7 @@ const viewBestScore = (score) => {
     message.textContent = "Rejouez pour tenter de battre votre record.";
   }
 
-  const formattedBestScore = formatTime(bestScore);
+  const formattedBestScore = TimeUtils.formatTime(bestScore);
   record.textContent = `Votre meilleur temps est ${formattedBestScore}`;
 };
 
@@ -97,9 +93,9 @@ const checkCell = (cell) => {
         odlSelection = [row, column];
         if (!gameBoard.gameBoard.flat().includes(0)) {
           chronometer.stopChronometer();
-          score = seconds;
+          score = chronometer.seconds;
           viewBestScore(score);
-          viewModal();
+          game.viewModal();
         }
       }, 1000);
     } else {
