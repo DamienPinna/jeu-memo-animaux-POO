@@ -1,14 +1,13 @@
 import Image from "./class/image.js";
+import Chronometer from "./class/chronometer.js";
 
+let chronometer = new Chronometer();
 const content = document.querySelector("#content");
-const chronometer = document.querySelector("#chronometer");
 const modal = document.querySelector("#modal");
 const restart = document.querySelector(".restart");
 const record = document.querySelector(".record");
 const message = document.querySelector(".message");
 
-let seconds = 0;
-let intervalId;
 let odlSelection = [];
 let nbClick = 0;
 let canPlay = true;
@@ -21,30 +20,7 @@ const gameBoard = [
   [0, 0, 0, 0, 0],
 ];
 
-const formatTime = (secondsScore) => {
-  const minutes = Math.floor(secondsScore / 60);
-  const seconds = secondsScore % 60;
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(seconds).padStart(2, "0");
-  return `${formattedMinutes}:${formattedSeconds}`;
-};
-
-const updateChronometer = () => {
-  seconds++;
-
-  const formattedTime = formatTime(seconds);
-  chronometer.innerText = `${formattedTime}`;
-};
-
-const startChronometer = () => {
-  intervalId = setInterval(updateChronometer, 1000);
-};
-
-const stopChronometer = () => {
-  clearInterval(intervalId);
-};
-
-startChronometer();
+chronometer.startChronometer();
 
 const randowArrayGenerator = () => {
   let array = [];
@@ -149,7 +125,7 @@ const checkCell = (cell) => {
         nbClick = 0;
         odlSelection = [row, column];
         if (!gameBoard.flat().includes(0)) {
-          stopChronometer();
+          chronometer.stopChronometer();
           score = seconds;
           viewBestScore(score);
           viewModal();
