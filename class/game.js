@@ -6,6 +6,10 @@ export default class Game {
     this.modal = document.querySelector("#modal");
     this.record = document.querySelector(".record");
     this.message = document.querySelector(".message");
+    this.odlSelection = [];
+    this.nbClick = 0;
+    this.canPlay = true;
+    this.score = 0;
   }
 
   viewModal = () => {

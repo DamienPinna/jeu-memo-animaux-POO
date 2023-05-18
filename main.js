@@ -8,11 +8,6 @@ const gameBoard = new GameBoard();
 const game = new Game();
 const restart = document.querySelector(".restart");
 
-let odlSelection = [];
-let nbClick = 0;
-let canPlay = true;
-let score = 0;
-
 chronometer.startChronometer();
 
 const displayGameBoard = () => {
@@ -49,36 +44,36 @@ const displayGameBoard = () => {
 };
 
 const checkCell = (cell) => {
-  if (canPlay) {
-    nbClick++;
+  if (game.canPlay) {
+    game.nbClick++;
     const row = cell.substr(0, 1);
     const column = cell.substr(2, 1);
     gameBoard.gameBoard[row][column] = gameBoard.resultBoard[row][column];
     displayGameBoard();
 
-    if (nbClick > 1) {
-      canPlay = false;
+    if (game.nbClick > 1) {
+      game.canPlay = false;
       setTimeout(() => {
         if (
           gameBoard.gameBoard[row][column] !==
-          gameBoard.resultBoard[odlSelection[0]][odlSelection[1]]
+          gameBoard.resultBoard[game.odlSelection[0]][game.odlSelection[1]]
         ) {
           gameBoard.gameBoard[row][column] = 0;
-          gameBoard.gameBoard[odlSelection[0]][odlSelection[1]] = 0;
+          gameBoard.gameBoard[game.odlSelection[0]][game.odlSelection[1]] = 0;
         }
         displayGameBoard();
-        canPlay = true;
-        nbClick = 0;
-        odlSelection = [row, column];
+        game.canPlay = true;
+        game.nbClick = 0;
+        game.odlSelection = [row, column];
         if (!gameBoard.gameBoard.flat().includes(0)) {
           chronometer.stopChronometer();
-          score = chronometer.seconds;
-          game.viewBestScore(score);
+          game.score = chronometer.seconds;
+          game.viewBestScore(game.score);
           game.viewModal();
         }
       }, 1000);
     } else {
-      odlSelection = [row, column];
+      game.odlSelection = [row, column];
     }
   }
 };
