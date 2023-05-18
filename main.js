@@ -1,4 +1,3 @@
-import TimeUtils from "./class/timeUtils.js";
 import Image from "./class/image.js";
 import Chronometer from "./class/chronometer.js";
 import GameBoard from "./class/gameBoard.js";
@@ -8,8 +7,6 @@ const chronometer = new Chronometer();
 const gameBoard = new GameBoard();
 const game = new Game();
 const restart = document.querySelector(".restart");
-const record = document.querySelector(".record");
-const message = document.querySelector(".message");
 
 let odlSelection = [];
 let nbClick = 0;
@@ -51,24 +48,6 @@ const displayGameBoard = () => {
   });
 };
 
-const viewBestScore = (score) => {
-  let bestScore = localStorage.getItem("bestScoreMemoAnimauxDP");
-  bestScore = bestScore ? parseInt(bestScore) : 3600;
-
-  if (score < bestScore) {
-    if (bestScore !== 3600) {
-      message.textContent = "Bravo ! Vous avez battu votre reccord !";
-    }
-    bestScore = score;
-    localStorage.setItem("bestScoreMemoAnimauxDP", bestScore);
-  } else {
-    message.textContent = "Rejouez pour tenter de battre votre record.";
-  }
-
-  const formattedBestScore = TimeUtils.formatTime(bestScore);
-  record.textContent = `Votre meilleur temps est ${formattedBestScore}`;
-};
-
 const checkCell = (cell) => {
   if (canPlay) {
     nbClick++;
@@ -94,7 +73,7 @@ const checkCell = (cell) => {
         if (!gameBoard.gameBoard.flat().includes(0)) {
           chronometer.stopChronometer();
           score = chronometer.seconds;
-          viewBestScore(score);
+          game.viewBestScore(score);
           game.viewModal();
         }
       }, 1000);
