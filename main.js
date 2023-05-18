@@ -17,30 +17,6 @@ let score = 0;
 
 chronometer.startChronometer();
 
-const randowArrayGenerator = () => {
-  let array = [];
-  let arrayImages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-  for (let i = 0; i < gameBoard.gameBoard.length; i++) {
-    let row = [];
-    for (let j = 0; j < gameBoard.gameBoard[0].length; j++) {
-      let randowArrayGenerator = false;
-      while (!randowArrayGenerator) {
-        let randomImage = Math.floor(Math.random() * 10);
-        if (arrayImages[randomImage] < 2) {
-          row.push(randomImage + 1);
-          arrayImages[randomImage]++;
-          randowArrayGenerator = true;
-        }
-      }
-    }
-    array.push(row);
-  }
-  return array;
-};
-
-const resultBoard = randowArrayGenerator();
-
 const displayGameBoard = () => {
   let text = "";
 
@@ -102,7 +78,7 @@ const checkCell = (cell) => {
     nbClick++;
     const row = cell.substr(0, 1);
     const column = cell.substr(2, 1);
-    gameBoard.gameBoard[row][column] = resultBoard[row][column];
+    gameBoard.gameBoard[row][column] = gameBoard.resultBoard[row][column];
     displayGameBoard();
 
     if (nbClick > 1) {
@@ -110,7 +86,7 @@ const checkCell = (cell) => {
       setTimeout(() => {
         if (
           gameBoard.gameBoard[row][column] !==
-          resultBoard[odlSelection[0]][odlSelection[1]]
+          gameBoard.resultBoard[odlSelection[0]][odlSelection[1]]
         ) {
           gameBoard.gameBoard[row][column] = 0;
           gameBoard.gameBoard[odlSelection[0]][odlSelection[1]] = 0;
