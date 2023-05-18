@@ -1,7 +1,9 @@
 import Image from "./class/image.js";
 import Chronometer from "./class/chronometer.js";
+import GameBoard from "./class/gameBoard.js";
 
-let chronometer = new Chronometer();
+const chronometer = new Chronometer();
+const gameBoard = new GameBoard();
 const content = document.querySelector("#content");
 const modal = document.querySelector("#modal");
 const restart = document.querySelector(".restart");
@@ -13,22 +15,15 @@ let nbClick = 0;
 let canPlay = true;
 let score = 0;
 
-const gameBoard = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-];
-
 chronometer.startChronometer();
 
 const randowArrayGenerator = () => {
   let array = [];
   let arrayImages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  for (let i = 0; i < gameBoard.length; i++) {
+  for (let i = 0; i < gameBoard.gameBoard.length; i++) {
     let row = [];
-    for (let j = 0; j < gameBoard[0].length; j++) {
+    for (let j = 0; j < gameBoard.gameBoard[0].length; j++) {
       let randowArrayGenerator = false;
       while (!randowArrayGenerator) {
         let randomImage = Math.floor(Math.random() * 10);
@@ -49,7 +44,7 @@ const resultBoard = randowArrayGenerator();
 const displayGameBoard = () => {
   let text = "";
 
-  gameBoard.forEach((row, indexRow) => {
+  gameBoard.gameBoard.forEach((row, indexRow) => {
     text += "<div>";
     row.forEach((cell, indexColumn) => {
       if (cell === 0) {
@@ -65,7 +60,7 @@ const displayGameBoard = () => {
 
   content.innerHTML = text;
 
-  gameBoard.forEach((row, indexRow) => {
+  gameBoard.gameBoard.forEach((row, indexRow) => {
     row.forEach((cell, indexColumn) => {
       if (cell === 0) {
         const button = document.getElementById(
@@ -107,24 +102,24 @@ const checkCell = (cell) => {
     nbClick++;
     const row = cell.substr(0, 1);
     const column = cell.substr(2, 1);
-    gameBoard[row][column] = resultBoard[row][column];
+    gameBoard.gameBoard[row][column] = resultBoard[row][column];
     displayGameBoard();
 
     if (nbClick > 1) {
       canPlay = false;
       setTimeout(() => {
         if (
-          gameBoard[row][column] !==
+          gameBoard.gameBoard[row][column] !==
           resultBoard[odlSelection[0]][odlSelection[1]]
         ) {
-          gameBoard[row][column] = 0;
-          gameBoard[odlSelection[0]][odlSelection[1]] = 0;
+          gameBoard.gameBoard[row][column] = 0;
+          gameBoard.gameBoard[odlSelection[0]][odlSelection[1]] = 0;
         }
         displayGameBoard();
         canPlay = true;
         nbClick = 0;
         odlSelection = [row, column];
-        if (!gameBoard.flat().includes(0)) {
+        if (!gameBoard.gameBoard.flat().includes(0)) {
           chronometer.stopChronometer();
           score = seconds;
           viewBestScore(score);
