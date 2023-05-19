@@ -1,14 +1,22 @@
 {
   "name": "Jeu_memo_animaux_POO",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "repository": "https://github.com/DamienPinna/jeu-memo-animaux-POO.git",
   "author": "Damien Pinna <damien.pinna@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "sass": "sass --watch ./design/sass/:./design/css/ --style expanded",
+    "sass": "sass --watch ./design/sass/:./design/css/ --style compressed",
     "prefix": "postcss ./design/css/style.css --use autoprefixer -d ./design/css/prefixed/",
+    "build": "rollup --config",
+    "minify:js": "uglifyjs ./dist/bundle.js -c -m -o ./dist/main.js",
+    "minify:j": "uglifyjs-folder .jsInput -o ./jsOutput/main.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "browserslist": "last 4 versions"
+  "browserslist": "last 4 versions",
+  "devDependencies": {
+    "rollup": "^3.22.0",
+    "uglify-js": "^3.17.4"
+  }
 }
