@@ -11,11 +11,11 @@
     "prefix": "postcss ./design/css/style.css --use autoprefixer -d ./design/css/prefixed/",
     "build": "rollup --config",
     "minify:js": "uglifyjs ./dist/bundle.js -c -m -o ./dist/main.js",
-    "minify:j": "uglifyjs-folder .jsInput -o ./jsOutput/main.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "browserslist": "last 4 versions",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.3",
     "rollup": "^3.22.0",
     "uglify-js": "^3.17.4"
   }
